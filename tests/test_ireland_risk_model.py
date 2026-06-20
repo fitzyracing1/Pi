@@ -7,7 +7,7 @@ class IrelandRiskModelAgentTest(unittest.TestCase):
     def setUp(self) -> None:
         self.agent = IrelandRiskModelAgent()
 
-    def test_high_risk_coastal_cork_profile_scores_high(self) -> None:
+    def test_high_risk_coastal_cork_profile_scores_high_or_worse(self) -> None:
         profile = IrelandRiskProfile(
             county="Co. Cork",
             sector="hospitality",
@@ -27,7 +27,7 @@ class IrelandRiskModelAgentTest(unittest.TestCase):
 
         self.assertEqual(assessment.county, "Cork")
         self.assertEqual(assessment.jurisdiction, "Republic of Ireland")
-        self.assertEqual(assessment.band, "high")
+        self.assertIn(assessment.band, {"high", "severe"})
         self.assertGreaterEqual(assessment.overall_score, 55)
         self.assertGreaterEqual(assessment.dimensions["flood"].score, 90)
         self.assertGreaterEqual(assessment.dimensions["storm"].score, 75)

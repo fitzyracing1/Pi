@@ -66,5 +66,5 @@ pricing, regulated advice, or automated acceptance decisions.
 Run the test suite with:
 
 ```bash
-PYTHONPATH=src python -m unittest
+PYTHONPATH=src python3 -m unittest discover -s tests
 ```
